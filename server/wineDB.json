@@ -1,0 +1,13 @@
+{
+  "winelist": [
+    {
+      "'name": "ALLESVERLOREN TINTA ROSE",
+      "volume": "750 ml",
+      "alcohol": "11%",
+      "taste": "Blush, An alluring nose of strawberries and raspberries. Fresh raspberries and strawberries on the palate, with a hint of vanilla. Exhibiting a perfect sugar / acidity balance, it has a lingering aftertaste.",
+      "price": "89.90",
+      "temp": "chilled",
+      "imgUrl": "../assets/wines/allesverloren.png"
+    }
+  ]
+}
