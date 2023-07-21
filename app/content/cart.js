@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import {useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 
 export default function Cart(){
-  const {items} = useSelector((state) => state.cart) 
+  const [items, setItems] = useState(0);
 
   return (
     <View style={styles.container}>
@@ -15,8 +14,6 @@ export default function Cart(){
     </View>
   )
 }
-
-
 
 const styles = StyleSheet.create({
 container:{
