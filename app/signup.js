@@ -4,11 +4,11 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function SignUp(){
-  const {value} = useSelector((state) => state.login) 
   
+
   return (
     <SafeAreaView>
-      <Text>Sign Up {value}</Text>
+      <Text>Sign Up</Text>
     </SafeAreaView>
   )
 }

@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import jwt_decode from 'jwt-decode';
 
 const initialState = {
-  items: 85,
+  items: 0,
   wines:[]
 }
 

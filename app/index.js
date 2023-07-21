@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, Image, Text, View, Pressable, StyleSheet } from 'react-native';
 
 export default function Welcome() {
+  const navigation = useNavigation();
   return (
     <ImageBackground
       source={require('../assets/img/main_bg.jpg')}
@@ -17,7 +18,7 @@ export default function Welcome() {
         <Text style={styles.slogan}>Find Your Grape Escape!</Text>
       </View>
 
-      <Pressable style={styles.button} onPress={() => {navigation.navigate('signup');}}>
+      <Pressable style={styles.button} onPress={() => {navigation.navigate('login');}}>
         <Text style={styles.buttonText}>Get started</Text>
       </Pressable>
     </ImageBackground>
