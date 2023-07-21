@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { ImageBackground, Image, Text, View, Pressable, StyleSheet } from 'react-native';
 
 export default function Welcome() {
@@ -17,16 +17,9 @@ export default function Welcome() {
         <Text style={styles.slogan}>Find Your Grape Escape!</Text>
       </View>
 
-      <Pressable style={styles.button} onPress={() => {}}>
-        
-        <Link href={{ pathname: 'home'}}><Text style={styles.buttonText}>Get started</Text></Link>
+      <Pressable style={styles.button} onPress={() => {navigation.navigate('signup');}}>
+        <Text style={styles.buttonText}>Get started</Text>
       </Pressable>
-
-      <Stack.Screen
-        options={{
-          title: 'Welcome to Wine Shmine',
-        }}
-      />
     </ImageBackground>
   );
 }
