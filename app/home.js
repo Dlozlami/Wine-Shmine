@@ -33,6 +33,7 @@ export default function Home() {
             <Text>Sparkling</Text>
             </Pressable>
         </ScrollView>
+        
     </View>
   );
 }
