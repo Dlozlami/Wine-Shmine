@@ -3,7 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import jwt_decode from 'jwt-decode';
 
 const initialState = {
-  value: 85,
+  name:'',
+  surname:'',
+  email:'',
+  password:'',
+  phone:'',
+  
 }
 
 export const loginSlice = createSlice({

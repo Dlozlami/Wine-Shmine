@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Search from '../../components/search';
-import { FontAwesome } from '@expo/vector-icons';
+import Search from '../components/search';
+import Cart from './content/cart';
+import { Stack } from 'expo-router';
 
 export default function Home() {
   return (
@@ -33,7 +33,6 @@ export default function Home() {
             <Text>Sparkling</Text>
             </Pressable>
         </ScrollView>
-      
     </View>
   );
 }
