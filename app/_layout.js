@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from'./home';
-import CartScreen from './cart';
+import CartScreen from '../components/cartIcon';
 import WelcomeScreen from './index';
 import LoginScreem from './login';
 import SignUpScreen from './signup';
