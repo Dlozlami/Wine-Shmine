@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Pressable,TextInput, Modal } from 'react-native';
+import React, { useState} from 'react';
+import { StyleSheet, Text, View, ImageBackground, Pressable, Modal } from 'react-native';
 import jwt_decode from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import {checkout} from '../feature/cartSlice';
 import Checkout from '../components/checkout';
+import CartCard from '../components/cartCard';
 
 export default function Cart() {
   const navigation = useNavigation();
