@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {checkout} from '../feature/cartSlice';
 import Checkout from '../components/checkout';
 
-export default function Login() {
+export default function Cart() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {itemsLength} = useSelector((store)=>store.cart);

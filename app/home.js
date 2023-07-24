@@ -36,7 +36,10 @@ export default function Home() {
             <Text>Sparkling</Text>
             </Pressable>
         </ScrollView>
-        <WineList wineList={wineDB.wineList} />
+        <ScrollView>
+          <WineList wineList={wineDB.wineList} />
+        </ScrollView>
+        
     </View>
   );
 }
