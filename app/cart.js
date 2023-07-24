@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Pressable,TextInput, Modal } from 'react-native';
 import jwt_decode from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import {buy} from '../feature/cartSlice';
 
 export default function Login() {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
+  const {itemsLength} = useSelector((store)=>store.cart);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userDetails, setUserDetails] = useState(null); // State to hold user details from JWT
+
 
 
 
 
   return (
-    <ImageBackground source={require('../../assets/img/app_bg.jpg')} style={{width: '100%', height: '100%'}}>
+    <ImageBackground source={require('../assets/img/app_bg.jpg')} style={{width: '100%', height: '100%'}}>
       <View style={styles.centerForm}>
         <View style={styles.container}>
           <Text style={styles.heading}>Log in</Text>
@@ -40,9 +43,9 @@ export default function Login() {
             </View>
             <Pressable
               style={[styles.button]}
-              onPress={() => {navigation.navigate('home')}}
+              onPress={() => dispatch(buy())}
             >
-              <Text style={styles.buttonText}>Log in</Text>
+              <Text style={styles.buttonText}>Checkout</Text>
             </Pressable>
           </View>
         </View>

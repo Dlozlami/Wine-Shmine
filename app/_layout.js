@@ -7,7 +7,6 @@ import LoginScreem from './login';
 import SignUpScreen from './signup';
 import { store } from '../store';
 import { Provider } from 'react-redux';
-import InsideScreen from './content/inside';
 
 const Stack = createNativeStackNavigator();
 
