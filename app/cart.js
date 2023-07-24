@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ImageBackground, Pressable,TextInput, Modal } f
 import jwt_decode from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import {buy} from '../feature/cartSlice';
+import {checkout} from '../feature/cartSlice';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -43,7 +43,7 @@ export default function Login() {
             </View>
             <Pressable
               style={[styles.button]}
-              onPress={() => dispatch(buy())}
+              onPress={() => dispatch(checkout())}
             >
               <Text style={styles.buttonText}>Checkout</Text>
             </Pressable>

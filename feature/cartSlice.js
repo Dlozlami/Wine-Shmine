@@ -10,22 +10,14 @@ const initialState = {
   total: 0,
   subtotal: 0,
   VAT: 0.15,
+  checkoutURL:''
 };
 
-// Async thunk to buy carts
-export const buy = createAsyncThunk('carts/buy', async (args, { rejectWithValue, getState }) => {
-  console.log('hello')
+
+export const checkout = createAsyncThunk('carts/buy', async (args, { rejectWithValue, getState }) => {
   try {
-    //const { itemsList } = getState().carts;
-    
-    // Create a list of all wine_ids from itemsList
-    //const cartIds = itemsList.map((item) => {item[0],item[1].wine_id});
-    const cartIds =[
-      [1,{priceInCents: 9800, name:'Raka Sauvignon Blanc 2022'}],
-      [2,{priceInCents: 5550, name:'De Wetshof Limestone Hill Chardonnay 2023'}],
-      [1,{priceInCents: 5800, name:'Backsberg Fifth Generation Hillside Sauvignon Blanc 2022'}]
-      ]
-    const response = await axios.post('http://localhost:8080/checkout', { cartIds });
+    return 
+    const response = await axios.post('http://localhost:8080/checkout', { subtotal});
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
