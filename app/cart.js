@@ -4,49 +4,54 @@ import jwt_decode from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import {checkout} from '../feature/cartSlice';
+import Checkout from '../components/checkout';
 
 export default function Login() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {itemsLength} = useSelector((store)=>store.cart);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [modalOpen,setModalOpen] = useState(false);
 
+
+  const handleCheckout = async () => {
+    try {
+      await dispatch(checkout());
+      setModalOpen(true)
+    } catch (error) {
+        console.log(error)
+    }
+  };
 
   return (
     <ImageBackground source={require('../assets/img/app_bg.jpg')} style={{width: '100%', height: '100%'}}>
       <View style={styles.centerForm}>
         <View style={styles.container}>
-          <Text style={styles.heading}>Log in</Text>
           <View style={styles.formContainer}>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Email</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Password</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your password"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={text => setPassword(text)}
-              />
-            </View>
+            
             <Pressable
               style={[styles.button]}
-              onPress={() => dispatch(checkout())}
+              onPress={handleCheckout}
             >
               <Text style={styles.buttonText}>Checkout</Text>
             </Pressable>
+
           </View>
         </View>
       </View>
+      {/* Fullscreen Modal */}
+      <Modal
+        visible={modalOpen}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setModalOpen(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            {/* Render the Checkout component inside the modal */}
+            <Checkout setModalOpen={setModalOpen} />
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 }
@@ -92,6 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#09331d',
     borderRadius: 5,
     paddingVertical: 12,
+    paddingHorizontal: 12,
     alignItems: 'center',
     marginTop: 20,
   },

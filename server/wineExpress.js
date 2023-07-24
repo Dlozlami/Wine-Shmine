@@ -22,7 +22,7 @@ app.post('/checkout', (req, res) => {
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
 	  "email": 'dlozi.mthethwa@gmail.com',
-	  "amount": 77777
+	  "amount": 743337
 	});
   
 	// Set up the options for the HTTPS request
