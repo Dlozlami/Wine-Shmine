@@ -17,12 +17,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/wine-list')
 
 app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
-	const { email, amount } = req.body;
-  
+	//const { email, amount } = req.body;
+	console.log('Posted')
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
-	  "email": email,
-	  "amount": amount
+	  "email": 'dlozi.mthethwa@gmail.com',
+	  "amount": 77777
 	});
   
 	// Set up the options for the HTTPS request

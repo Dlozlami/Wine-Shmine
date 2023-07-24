@@ -1,11 +1,12 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
+import {clearCheckoutURL} from '../feature/cartSlice';
 
 export default function Pay() {
     const navigation = useNavigation();
-    const authorization_url = 'https://checkout.paystack.com/luKuasMan';
-    const callback_url = 'http://10.255.66.152:19000/home';
+    const authorization_url =  useSelector((state) => state.cart.checkoutURL.authorization_url);
+    const callback_url = useSelector((state) => state.cart.callBackURL);
 
   onNavigationStateChange = state => {
  

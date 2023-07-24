@@ -10,19 +10,21 @@ const initialState = {
   total: 0,
   subtotal: 0,
   VAT: 0.15,
-  checkoutURL:''
+  checkoutData:null,
+  callBackURL:'http://10.255.66.152:19000/home'
 };
 
 
-export const checkout = createAsyncThunk('carts/buy', async (args, { rejectWithValue, getState }) => {
-  try {
-    return 
-    const response = await axios.post('http://localhost:8080/checkout', { subtotal});
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error.response.data);
+export const checkout = createAsyncThunk('carts/checkout', async (args, thunkAPI) => {
+    try {
+      const response = await axios.post('http://localhost:8080/checkout', { 'name':'dlozi.mthethwa'});
+      thunkAPI.dispatch(setCheckoutData(response.data.data));
+
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
-});
+);
 
 const cartSlice = createSlice({
   name: 'carts',
@@ -63,6 +65,12 @@ const cartSlice = createSlice({
         updateSubtotalAndTotal(state);
       }
     },
+    setCheckoutData(state,action) {
+        state.checkoutURL = action.payload;
+    },
+    clearCheckoutData(state) {
+        state.checkoutURL = null;
+    },
   },
 });
 
@@ -71,5 +79,5 @@ const updateSubtotalAndTotal = (state) => {
   state.total = state.subtotal + state.VAT * state.subtotal;
 };
 
-export const { addItemToList, removeItemFromList, decreaseQauntity } = cartSlice.actions;
+export const { addItemToList, removeItemFromList, decreaseQauntity,clearCheckoutURL } = cartSlice.actions;
 export default cartSlice.reducer;

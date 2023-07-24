@@ -13,9 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
 
-
-
-
   return (
     <ImageBackground source={require('../assets/img/app_bg.jpg')} style={{width: '100%', height: '100%'}}>
       <View style={styles.centerForm}>
