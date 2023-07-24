@@ -1,20 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { StyleSheet, Text, View, Pressable, Modal } from 'react-native';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {checkout} from '../feature/cartSlice';
 import Checkout from '../components/checkout';
 
 export default function Totals() {
   const { total, subtotal, VAT } = useSelector((store) => store.cart);
-  const [modalOpen,setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     try {
       await dispatch(checkout());
-      setModalOpen(true)
+      setModalOpen(true);
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -30,6 +34,16 @@ export default function Totals() {
         <Text style={[styles.label, styles.bold]}>Total</Text>
         <Text style={[styles.value, styles.bold]}>{`ZAR ${total.toFixed(2)}`}</Text>
       </View>
+
+      {/* Checkout Button */}
+      <Pressable onPress={handleCheckout} style={styles.checkoutButton}>
+        <Text style={styles.checkoutButtonText}>Checkout</Text>
+      </Pressable>
+
+      {/* Fullscreen Modal */}
+      <Modal visible={modalOpen} animationType="slide">
+        <Checkout setModalOpen={setModalOpen} />
+      </Modal>
     </View>
   );
 }
@@ -63,5 +77,25 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: 'bold',
+  },
+  checkoutButton: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+  },
+  checkoutButtonText: {
+    color: '#09331d',
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
