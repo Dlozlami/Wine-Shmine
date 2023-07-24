@@ -8,7 +8,7 @@ const initialState = {
   email:'dlozi.mthethwa@gmail.com',
   password:'12345',
   phone:'+277603509451',
-  picture:''
+  picture:'../assets/users/uxdlozi.jpg'
 }
 
 export const loginSlice = createSlice({
