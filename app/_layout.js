@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from'./home';
-import CartScreen from '../components/cartIcon';
+import CartScreen from './cart';
 import WelcomeScreen from './index';
 import LoginScreem from './login';
 import SignUpScreen from './signup';
@@ -22,7 +22,6 @@ export default  function App() {
         <Stack.Screen name="signup" component={SignUpScreen} options={{ title: 'Sign Up',headerShown: false }}/>
         <Stack.Screen name="home" component={HomeScreen} options={{ title: 'Home' }}/>
         <Stack.Screen name="cart" component={CartScreen} options={{ title: 'Cart' }}/>
-        <Stack.Screen name="content/inside" component={InsideScreen} options={{ title: 'Inside' }}/>
       </Stack.Navigator>
     </Provider>
   );

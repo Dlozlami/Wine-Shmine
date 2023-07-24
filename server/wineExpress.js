@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require("morgan");
 const mongoose = require('mongoose');
-
+const https = require('https');
 const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors());
@@ -15,7 +15,7 @@ const refreshKey = 'o8uhs7errqlosw830j#^*)N[]xsyg26gednpsrtuui98908732fros-w;w.s
 mongoose.connect('mongodb://127.0.0.1:27017/wine-list')
 
 
-app.post('/make-payment', (req, res) => {
+app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
 	const { email, amount } = req.body;
   
@@ -32,7 +32,7 @@ app.post('/make-payment', (req, res) => {
 	  path: '/transaction/initialize',
 	  method: 'POST',
 	  headers: {
-		Authorization: 'Bearer SECRET_KEY', // Replace with your actual Paystack API secret key
+		Authorization: 'Bearer sk_test_8aaa40862087154621ff4fd5a8b9bfee00d6283f', // Replace with your actual Paystack API secret key
 		'Content-Type': 'application/json'
 	  }
 	};

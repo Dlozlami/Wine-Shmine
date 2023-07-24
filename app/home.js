@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
 import Search from '../components/search';
-import Cart from './content/cart';
+import Cart from './cart';
 import { Stack } from 'expo-router';
 
 export default function Home() {
