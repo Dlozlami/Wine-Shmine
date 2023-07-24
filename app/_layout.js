@@ -19,8 +19,8 @@ export default  function App() {
         <Stack.Screen name="index" component={WelcomeScreen} options={{ title: 'Welcome',headerShown: false }}/>
         <Stack.Screen name="login" component={LoginScreem} options={{ title: 'Log In',headerShown: false }}/>
         <Stack.Screen name="signup" component={SignUpScreen} options={{ title: 'Sign Up',headerShown: false }}/>
-        <Stack.Screen name="home" component={HomeScreen} options={{ title: 'Home' }}/>
-        <Stack.Screen name="cart" component={CartScreen} options={{ title: 'Cart' }}/>
+        <Stack.Screen name="home" component={HomeScreen} options={{ title: 'Home',headerShown: false  }}/>
+        <Stack.Screen name="cart" component={CartScreen} options={{ title: 'Cart',headerShown: false  }}/>
       </Stack.Navigator>
     </Provider>
   );

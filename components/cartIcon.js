@@ -4,13 +4,13 @@ import {useSelector, useDispatch } from 'react-redux';
 import { Entypo } from '@expo/vector-icons';
 
 export default function Cart(){
-  const {items} = useSelector((state) => state.cart) 
+  const {itemsLength} = useSelector((state) => state.cart) 
 
   return (
     <View style={styles.container}>
       <Entypo name="shopping-cart" size={24} color="#09331d" />
       <View style={styles.items}>
-        <Text style={styles.textItems}>{items}</Text>
+        <Text style={styles.textItems}>{ititemsLengthems}</Text>
       </View>
     </View>
   )
