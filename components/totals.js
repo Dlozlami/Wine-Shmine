@@ -1,10 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Checkout from '../components/checkout';
 
 export default function Totals() {
   const { total, subtotal, VAT } = useSelector((store) => store.cart);
+  const [modalOpen,setModalOpen] = useState(false);
 
+  const handleCheckout = async () => {
+    try {
+      await dispatch(checkout());
+      setModalOpen(true)
+    } catch (error) {
+        console.log(error)
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.row}>

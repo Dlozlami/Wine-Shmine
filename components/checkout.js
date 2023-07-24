@@ -1,13 +1,13 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
-import {clearCheckoutData,clearitemsList} from '../feature/cartSlice';
+import {clearCheckoutData,clearitemsList,getAuthorization_url} from '../feature/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Checkout({setModalOpen}) {
   const dispatch = useDispatch();
     const navigation = useNavigation();
-    const authorization_url =  useSelector((state) => state.cart.checkoutData.authorization_url);
+    const authorization_url =  getAuthorization_url;
     const callback_url = useSelector((state) => state.cart.callBackURL);
 
   onNavigationStateChange = state => {

@@ -68,6 +68,9 @@ const cartSlice = createSlice({
     setCheckoutData(state,action) {
         state.checkoutData = action.payload;
     },
+    getAuthorization_url(state,action) {
+        return state.checkoutData.authorization_url;
+    },
     clearCheckoutData(state) {
         state.checkoutData = null;
     },
@@ -91,5 +94,5 @@ const updateSubtotalAndTotal = (state) => {
 };
 
 
-export const { addItemToList, removeItemFromList, decreaseQauntity,clearCheckoutData,clearitemsList } = cartSlice.actions;
+export const { addItemToList, removeItemFromList, decreaseQauntity,clearCheckoutData,clearitemsList,getAuthorization_url} = cartSlice.actions;
 export default cartSlice.reducer;
