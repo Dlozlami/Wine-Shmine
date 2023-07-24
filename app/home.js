@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
 import Search from '../components/search';
 import Cart from './cart';
 import { Stack } from 'expo-router';
+import WineList from '../components/wineList';
+import wineDB from '../wines/wineDB.json'
+
 
 export default function Home() {
   return (
@@ -33,7 +36,7 @@ export default function Home() {
             <Text>Sparkling</Text>
             </Pressable>
         </ScrollView>
-        
+        <WineList wineList={wineDB.wineList} />
     </View>
   );
 }

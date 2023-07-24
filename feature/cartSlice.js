@@ -19,7 +19,7 @@ export const checkout = createAsyncThunk('carts/checkout', async (args, thunkAPI
     try {
       const response = await axios.post('http://localhost:8080/checkout', { 'name':'dlozi.mthethwa'});
       thunkAPI.dispatch(setCheckoutData(response.data.data));
-      console.log(response.data.data)
+      console.log()
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -81,16 +81,15 @@ const cartSlice = createSlice({
 
 const updateSubtotalAndTotal = (state) => {
   if (state.itemsList.length === 0) {
-    // If itemsList is empty, set subtotal and total to 0
     state.subtotal = 0;
     state.total = 0;
   } else {
-    // Calculate subtotal using reduce if itemsList is not empty
-    state.subtotal = state.itemsList.reduce((acc, item) => acc + item[0] * item[1].priceInCent, 0);
+    //state.itemsList.map((item)=>console.log(item[0]+'*'+item[1].priceInCents))
+    state.subtotal = state.itemsList.reduce((acc, item) => acc + (item[0] * item[1].priceInCents), 0);
     state.total = state.subtotal + state.VAT * state.subtotal;
   }
 };
 
 
-export const { addItemToList, removeItemFromList, setCheckoutData,decreaseQauntity,clearCheckoutData,clearitemsList } = cartSlice.actions;
+export const { addItemToList, removeItemFromList, decreaseQauntity,clearCheckoutData,clearitemsList } = cartSlice.actions;
 export default cartSlice.reducer;
