@@ -59,6 +59,9 @@ export default function Login() {
             >
               <Text style={styles.buttonText}>Log in</Text>
             </Pressable>
+            <Pressable onPress={() => navigation.navigate('signup')}>
+              <Text style={styles.signupText}>Don't have an account? Sign up here!</Text>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -157,4 +160,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  signupText: {
+    textAlign: 'center',
+    marginTop: 10,
+    color: '#09331d',
+  }
 });

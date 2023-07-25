@@ -21,13 +21,6 @@ export default function AddToCart({ wine }) {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 5,
-    paddingVertical: 8,
-    marginVertical: 8,
-    elevation: 3,
-  },
+
 
 });

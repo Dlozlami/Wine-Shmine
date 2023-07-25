@@ -13,7 +13,8 @@ export default function Picture(){
 
 const styles = StyleSheet.create({
   tinyUser: {
-    width: 50,
-    height: 50,
+    width: 38,
+    height: 38,
+    borderRadius: 10,
   },
 });

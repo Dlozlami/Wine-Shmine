@@ -23,16 +23,16 @@ export default function Totals() {
     <View style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.label}>Subtotal</Text>
-        <Text style={styles.value}>{`ZAR ${subtotal.toFixed(2)}`}</Text>
+        <Text style={styles.value}>{`${(subtotal/100).toFixed(2)}`}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.label}>VAT @ 15%</Text>
-        <Text style={styles.value}>{`ZAR ${(subtotal * 0.15).toFixed(2)}`}</Text>
+        <Text style={styles.value}>{`${((subtotal/100) * 0.15).toFixed(2)}`}</Text>
       </View>
       <View style={styles.line} />
       <View style={[styles.row, styles.totalRow]}>
         <Text style={[styles.label, styles.bold]}>Total</Text>
-        <Text style={[styles.value, styles.bold]}>{`ZAR ${total.toFixed(2)}`}</Text>
+        <Text style={[styles.value, styles.bold]}>{`ZAR ${(total/100).toFixed(2)}`}</Text>
       </View>
 
       {/* Checkout Button */}

@@ -1,18 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {useSelector, useDispatch } from 'react-redux';
+import {useSelector } from 'react-redux';
 import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Cart(){
+  const navigation = useNavigation();
   const {itemsLength} = useSelector((state) => state.cart) 
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={() => {navigation.navigate('cart')}}>
       <Entypo name="shopping-cart" size={24} color="#09331d" />
       <View style={styles.items}>
-        <Text style={styles.textItems}>{ititemsLengthems}</Text>
+        <Text style={styles.textItems}>{itemsLength}</Text>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

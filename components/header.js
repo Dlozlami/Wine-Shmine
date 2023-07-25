@@ -1,38 +1,55 @@
-import { StyleSheet, Text, ImageBackground, View, Pressable} from 'react-native';
+import { StyleSheet, Text, Image, View, Pressable, StatusBar, SafeAreaView} from 'react-native';
 import React from 'react';
 import Picture from '../components/picture';
 import CartIcon from '../components/cartIcon';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function Header({title, picture, cart,home}){
-  return (
+export default function Header({title, picture, cart, home}){
 
-    <ImageBackground source={require('../assets/img/main_bg.jpg')} style={{width: '100%'}}>
-        <View style={styles.container}>
-            <View style={styles.left}>
+  return (
+    <View style={styles.main}>
+        <StatusBar/>
+        <SafeAreaView style={styles.container}>
+            {home?<View style={styles.left}>
                 <Pressable onPress={() => {navigation.navigate('home')}}>
                     <Ionicons name="home-sharp" size={24} color="white" />
                 </Pressable>
-            </View>
+            </View>:null}
             <View style={styles.right}>
-                <CartIcon/>
-                <Picture/>
+                {cart?<CartIcon/>:null}
+                {picture?<Picture/>:null}
             </View>
-        </View>
-    </ImageBackground>
+        </SafeAreaView>
+        {title.length===0?<Text style={styles.title}>{title}</Text>:null}
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+    main:{
+        backgroundColor:'#09331d',
+        padding:16
+    },
     container:{
-        height:"30%",
+        flex:1,
         flexDirection:'row',
+        marginTop:50
     },
     left:{
-        alignItems:'flex-start',
-        width:'50%'
+        justifyContent:'center',
+        width:'70%'
     },
     right:{
-        alignItems:'flex-end'
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        width:'30%'
+    },
+    title:
+    {
+        marginVertical:10,
+        fontWeight:600,
+        fontSize:30,
+        color: 'white',
     }
 })

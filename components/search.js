@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#e2dedb',
     borderRadius: 5, // Rounded edges
     paddingHorizontal: 12,
     paddingVertical: 8,
