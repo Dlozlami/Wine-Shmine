@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 import Search from '../components/search';
 import FilterBTN from '../components/filterBTN';
-import wineDB from '../wines/wineDB'
+import wineDB from '../wines/wineDB.json'
+const winelist = require('../wines/wineDB')
 import WineList from '../components/wineList';
 import Header from '../components/header';
 
@@ -28,8 +29,8 @@ export default function Home() {
         <View>
             <Text style={styles.wineHeader}>Popular wines</Text>
         </View>
-        {console.log(wineDB)}
-        <WineList wineList={wineDB} />
+        {console.log(winelist.wineDB)}
+        <WineList wineList={winelist.wineDB} />
 
           
       </View>

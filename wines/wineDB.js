@@ -1,4 +1,4 @@
-const wineDB = [
+export const wineDB = [
       {
         wine_id: "WS12345",
         name: "Jordan Chameleon Rosé 2022",

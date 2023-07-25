@@ -8,7 +8,7 @@ export default function WineCard({ wine }) {
     <View style={styles.card}>
       {/* Wine picture */}
       <View style={{alignItems:'center',justifyContent:'center',width:'30%'}}>
-            <Image source={{ uri: (wine.imgUrl) }} style={styles.image} />
+            <Image source={wine.imgUrl} style={styles.image} />
             
       </View>
       <View style={{ justifyContent:'center',flex: 1, paddingLeft: 10 }}>
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 10,
-    height: 20, 
+    width: 100,
+    height: 200, 
   },
   name: {
     fontSize: 18,
