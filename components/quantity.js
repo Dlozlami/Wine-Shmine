@@ -2,11 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToList, decreaseQuantity } from '../feature/cartSlice';
+import { addItemToList, decreaseQauntity } from '../feature/cartSlice';
 
 export default function Quantity({ itemIndex }) {
+  
   const dispatch = useDispatch();
-  const { itemList } = useSelector((store) => store.cart);
+  const { itemsList,itemsLength } = useSelector((store) => store.cart);
+  
 
   const addItem = () => {
     dispatch(addItemToList(itemIndex));
@@ -22,7 +24,7 @@ export default function Quantity({ itemIndex }) {
         <AntDesign name="pluscircleo" size={24} color="#09331d" />
       </Pressable>
       <View style={[styles.square, styles.whiteBackground]}>
-        <Text style={styles.text}>{itemList[itemIndex][0]}</Text>
+        <Text style={styles.text}>{itemsLength===0?'':itemsList[itemIndex][0]}</Text>
       </View>
       <Pressable onPress={decreaseQuantity} style={[styles.square, styles.grayBackground]}>
         <AntDesign name="minuscircleo" size={24} color="#09331d" />
@@ -36,6 +38,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: 150,
+    height: 150,
   },
   square: {
     width: 50,
@@ -52,5 +56,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#09331d',
+    fontSize:20,
+    fontWeight:600,
   },
 });

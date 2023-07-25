@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: '70%',
-    height: 200, 
+    width: 10,
+    height: 20, 
   },
   name: {
     fontSize: 18,

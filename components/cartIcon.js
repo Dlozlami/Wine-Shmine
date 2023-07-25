@@ -6,13 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Cart(){
   const navigation = useNavigation();
-  const {itemsLength} = useSelector((state) => state.cart) 
+  const {totalQauntities} = useSelector((state) => state.cart) 
 
   return (
     <Pressable style={styles.container} onPress={() => {navigation.navigate('cart')}}>
       <Entypo name="shopping-cart" size={24} color="#09331d" />
       <View style={styles.items}>
-        <Text style={styles.textItems}>{itemsLength}</Text>
+        <Text style={styles.textItems}>{totalQauntities}</Text>
       </View>
     </Pressable>
   )
@@ -28,6 +28,9 @@ container:{
   backgroundColor: '#e2dedb',
   borderRadius: 5,
   padding:5,
+  width: 60,
+  height: 38,
+  marginRight:10
 },
 items:{
   alignItems: 'center',

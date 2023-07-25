@@ -1,10 +1,12 @@
-import { StyleSheet, Text, Image, View, Pressable, StatusBar, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, Pressable, StatusBar, SafeAreaView} from 'react-native';
 import React from 'react';
 import Picture from '../components/picture';
 import CartIcon from '../components/cartIcon';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header({title, picture, cart, home}){
+    const navigation = useNavigation();
 
   return (
     <View style={styles.main}>
@@ -12,7 +14,7 @@ export default function Header({title, picture, cart, home}){
         <SafeAreaView style={styles.container}>
             {home?<View style={styles.left}>
                 <Pressable onPress={() => {navigation.navigate('home')}}>
-                    <Ionicons name="home-sharp" size={24} color="white" />
+                    <Ionicons name="home-sharp" size={32} color="white" />
                 </Pressable>
             </View>:null}
             <View style={styles.right}>
@@ -31,7 +33,6 @@ const styles = StyleSheet.create({
         padding:16
     },
     container:{
-        flex:1,
         flexDirection:'row',
         marginTop:50
     },
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
-        width:'30%'
+        width:'20%'
     },
     title:
     {

@@ -10,7 +10,6 @@ export default function AddToCart({ wine }) {
 
   const handleAddToCart = () => {
     dispatch(addItemToList(wine));
-    console.log(itemsList)
   };
 
   return (
