@@ -1,44 +1,33 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
 import Search from '../components/search';
-import Cart from './cart';
-import { Stack } from 'expo-router';
-import WineList from '../components/wineList';
+import FilterBTN from '../components/filterBTN';
 import wineDB from '../wines/wineDB.json'
+import WineList from '../components/wineList';
 
 
 export default function Home() {
+
   return (
     <View style={styles.container}>
         <View style={styles.searchContainer}>
             <Search />
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
-            <Pressable style={styles.categoryButton}>
-            <Text>Dry</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>Sweet</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>Semi-Sweet</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>Red</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>White</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>Rose</Text>
-            </Pressable>
-            <Pressable style={styles.categoryButton}>
-            <Text>Sparkling</Text>
-            </Pressable>
-        </ScrollView>
-        <ScrollView>
+        <FilterBTN title="Dry" />
+        <FilterBTN title="Sweet" />
+        <FilterBTN title="Semi-Sweet" />
+        <FilterBTN title="Red" />
+        <FilterBTN title="White" />
+        <FilterBTN title="Rose" />
+        <FilterBTN title="Sparkling" />
+      </ScrollView>
+      <View>
+          <Text style={styles.wineHeader}>Popular wines</Text>
+      </View>
+      <ScrollView>
           <WineList wineList={wineDB.wineList} />
-        </ScrollView>
+      </ScrollView>
         
     </View>
   );
@@ -55,6 +44,8 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding:15,
+    marginVertical:5
   },
   categoryButton: {
     backgroundColor: '#fff',
@@ -68,4 +59,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
+  wineHeader:{
+    fontWeight:600,
+    fontSize:30,
+    color: '#09331d',
+  }
 });
