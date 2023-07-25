@@ -19,19 +19,19 @@ const FilterBTN = ({ title }) => {
       ]}
       onPress={toggleState}
     >
-      <Text style={{ color: active ? 'white' : '#09331d' }}>{title}</Text>
+      <Text style={{ color: active ? 'white' : '#09331d',fontSize:20}}>{title}</Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    padding: 10,
     borderRadius: 10,
     borderWidth: 1,
-    marginVertical: 5,
-    marginHorizontal:5
+    marginHorizontal:5,
+    alignItems:'center',
+    justifyContent:'center'
   },
 });
 

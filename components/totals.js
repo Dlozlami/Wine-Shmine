@@ -2,18 +2,18 @@ import { StyleSheet, Text, View, Pressable, Modal } from 'react-native';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {checkout} from '../feature/cartSlice';
-import Checkout from '../components/checkout';
+import { Linking } from 'react-native';
+
 
 export default function Totals() {
   const { total, subtotal, VAT } = useSelector((store) => store.cart);
-  const [modalOpen, setModalOpen] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     try {
-      await dispatch(checkout());
-      setModalOpen(true);
+      const url = await dispatch(checkout());
+      console.log(url)
+      await Linking.openURL(url);
     } catch (error) {
       console.log(error);
     }
@@ -40,10 +40,6 @@ export default function Totals() {
         <Text style={styles.checkoutButtonText}>Checkout</Text>
       </Pressable>
 
-      {/* Fullscreen Modal */}
-      <Modal visible={modalOpen} animationType="slide">
-        <Checkout setModalOpen={setModalOpen} />
-      </Modal>
     </View>
   );
 }
@@ -52,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#09331d',
     padding: 10,
+    borderRadius:10
   },
   row: {
     flexDirection: 'row',

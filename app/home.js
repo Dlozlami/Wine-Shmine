@@ -17,7 +17,7 @@ export default function Home() {
           <View style={styles.searchContainer}>
               <Search />
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
           <FilterBTN title="Dry" />
             <FilterBTN title="Sweet" />
             <FilterBTN title="Semi-Sweet" />
@@ -29,7 +29,6 @@ export default function Home() {
         <View>
             <Text style={styles.wineHeader}>Popular wines</Text>
         </View>
-        {console.log(winelist.wineDB)}
         <WineList wineList={winelist.wineDB} />
 
           
@@ -42,32 +41,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+
   },
   searchContainer: {
     width: '100%',
-    marginVertical:10
+    marginVertical:10,
+
   },
   scrollContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 15,
-    alignItems: 'center',
-  },
-  categoryButton: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginHorizontal: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 3,
+    
+
   },
   wineHeader:{
     fontWeight:900,
     fontSize:28,
-    color: '#09331d',
+    
   }
 });

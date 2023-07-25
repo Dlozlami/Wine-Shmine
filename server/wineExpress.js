@@ -9,14 +9,22 @@ const WineList = require('../models/wineList.model');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(morgan("tiny"))
+app.use(morgan("tiny"));
 
 const secretKey = 'o8uhs7errqlosw830j#^*)N[]pek3e9--o-wqldsm902is,-dsuew0fduyj2-slw0wjd4r[w0-iiwqokweidg8wqj2pss9tffb96ywaxb937ehd90dow-;e;==lk9j98j/.oi-=[;k28uw4rq4ewfrqf+q';
 const refreshKey = 'o8uhs7errqlosw830j#^*)N[]xsyg26gednpsrtuui98908732fros-w;w.skhgfeazdsuew0fduyj2-slw0wjd4r[w0-iiwqokdfdweidg8wqj2pss9tff848r4e9p[jn9765tbw ds=1qqwsfrqf+q';
 
 mongoose.connect('mongodb://127.0.0.1:27017/wine-shmine')
 
+app.get('/',function(req,res){
+	res.send("Welcome to the Wine Shmine API\n\n===================================\n");
+});
+
 app.get('/api/winelist',function(req,res){
+
+});
+
+app.post('/api/winelist',function(req,res){
 
 });
 
@@ -24,8 +32,36 @@ app.get('/api/users',function(req,res){
 
 });
 
+
+app.post('/api/users', async function(req, res) {
+	try {
+	  // Extract the user data from the request body
+	  const { name, surname, email, password, phone, picture } = req.body;
+  
+	  // Create a new User instance using the User model
+	  const newUser = new User({
+		name,
+		surname,
+		email,
+		password,
+		phone,
+		picture,
+	  });
+  
+	  // Save the new user to the database
+	  const savedUser = await newUser.save();
+  
+	  // Respond with the saved user data
+	  res.status(201).json(savedUser);
+	} catch (error) {
+	  // If there's an error, respond with an error message
+	  res.status(500).json({ error: 'Could not create user' });
+	}
+  });
+  
+
 app.post('/login',function(req,res){
-	
+
 });
 
 
@@ -36,7 +72,7 @@ app.post('/checkout', (req, res) => {
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
 	  "email": 'dlozi.mthethwa@gmail.com',
-	  "amount": 743337
+	  "amount": 96375
 	});
   
 	// Set up the options for the HTTPS request

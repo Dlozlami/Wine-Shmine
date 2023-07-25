@@ -9,7 +9,7 @@ export default function CartCard({ itemIndex, wine }) {
 
       <View style={styles.container}>
         <View style={styles.left}>
-          <Image source={{ uri: wine[1].imgUrl }} style={styles.image} />
+          <Image source={wine[1].imgUrl} style={styles.image} />
         </View>
         <View style={styles.middle}>
           <Text style={styles.title}>{wine[1].name}</Text>
@@ -32,13 +32,12 @@ const styles = StyleSheet.create({
 
   },
   image: {
-    width: 80,
-    height: 100,
-    resizeMode: 'contain',
+    width: 100,
+    height: 200,
   },
   middle: {
     marginLeft: 10,
-    width:"70%"
+    width:"60%"
   },
   title: {
     fontSize: 16,
