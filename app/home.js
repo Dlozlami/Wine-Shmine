@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 import Search from '../components/search';
 import FilterBTN from '../components/filterBTN';
-import wineDB from '../wines/wineDB.json'
+import wineDB from '../wines/wineDB'
 import WineList from '../components/wineList';
 import Header from '../components/header';
+
 
 export default function Home() {
 
@@ -27,8 +28,8 @@ export default function Home() {
         <View>
             <Text style={styles.wineHeader}>Popular wines</Text>
         </View>
-
-        <WineList wineList={wineDB.wineList} />
+        {console.log(wineDB)}
+        <WineList wineList={wineDB} />
 
           
       </View>
