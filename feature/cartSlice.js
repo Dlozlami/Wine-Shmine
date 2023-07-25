@@ -45,9 +45,10 @@ const cartSlice = createSlice({
       updateSubtotalAndTotal(state);
     },
     removeItemFromList(state, action) {
+      console.log('1 mos??')
       const wineIdToRemove = action.payload;
       let myList = state.itemsList.splice(wineIdToRemove, 1);
-      console.log(myList)
+
       state.itemsList = myList
       state.itemsLength = state.itemsList.length;
       updateSubtotalAndTotal(state);
@@ -65,8 +66,12 @@ const cartSlice = createSlice({
       
       if(state.itemsList[wineIdToDecrease][0]===1) 
       { 
-        console.log('1 mos??')
-        removeItemFromList(wineIdToDecrease);
+        console.log('remove: '+state.itemsList[wineIdToDecrease][1].name)
+        const wineIdToRemove = action.payload;
+        let myList = state.itemsList;
+        myList.splice(wineIdToRemove, 0);
+        console.log(myList)
+        state.itemsList = myList
       }
       
       state.itemsLength = state.itemsList.length;

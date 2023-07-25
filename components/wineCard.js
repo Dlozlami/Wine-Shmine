@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import AddToCart from './addToCart';
 
+
 export default function WineCard({ wine }) {
   return (
     <View style={styles.card}>
       {/* Wine picture */}
       <View style={{alignItems:'center',justifyContent:'center',width:'30%'}}>
-            <Image source={{ uri: wine.imgUrl }} style={styles.image} />
+            <Image source={{ uri: (wine.imgUrl) }} style={styles.image} />
             
       </View>
       <View style={{ justifyContent:'center',flex: 1, paddingLeft: 10 }}>
