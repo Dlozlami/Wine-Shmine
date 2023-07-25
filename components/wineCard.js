@@ -6,17 +6,18 @@ export default function WineCard({ wine }) {
   return (
     <View style={styles.card}>
       {/* Wine picture */}
-      <View style={{alignItems:'center',justifyContent:'center'}}>
+      <View style={{alignItems:'center',justifyContent:'center',width:'30%'}}>
             <Image source={{ uri: wine.imgUrl }} style={styles.image} />
-            <Text style={styles.name}>{wine.name}</Text>
-                <Text style={styles.typeVolume}>
-                    {wine.type} wine, {wine.volume}
-                </Text>
-                <Text style={styles.price}>R{wine.priceInCents / 100}</Text>
-                <AddToCart wine={wine} />
+            
       </View>
-
-      
+      <View style={{ justifyContent:'center',flex: 1, paddingLeft: 10 }}>
+          <Text style={styles.name}>{wine.name}</Text>
+            <Text style={styles.typeVolume}>
+                    {wine.type} wine, {wine.volume}
+            </Text>
+            <Text style={styles.price}>R{wine.priceInCents / 100}</Text>
+            <AddToCart wine={wine} />
+      </View>
     </View>
   );
 }
@@ -32,18 +33,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 2,
+    flexDirection:'row',
+    width:300
     
   },
   image: {
-    width: '50%',
-    height: 150, // Adjust the height to control the size of the image
-    borderRadius: 5,
+    width: '70%',
+    height: 200, 
   },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black', 
-
   },
   typeVolume: {
     fontSize: 14,

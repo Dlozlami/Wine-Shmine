@@ -26,15 +26,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     paddingVertical: 8,
-    paddingHorizontal: 16,
     marginVertical: 8,
-
     elevation: 3,
   },
-  buttonText: {
-    marginLeft: 8,
-    color: '#09331d',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
+
 });

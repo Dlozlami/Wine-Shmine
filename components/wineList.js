@@ -15,6 +15,9 @@ export default function WineList({ wineList }){
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 });
 

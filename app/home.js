@@ -1,35 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 import Search from '../components/search';
 import FilterBTN from '../components/filterBTN';
 import wineDB from '../wines/wineDB.json'
 import WineList from '../components/wineList';
-
+import Header from '../components/header';
 
 export default function Home() {
 
   return (
-    <View style={styles.container}>
-        <View style={styles.searchContainer}>
-            <Search />
+    <ImageBackground source={require('../assets/img/app_bg.jpg')} style={{ width: '100%', height: '100%' }}>
+      <Header title={''} picture={true} cart={true} home={true}/>
+      <View style={styles.container}>
+          <View style={styles.searchContainer}>
+              <Search />
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+          <FilterBTN title="Dry" />
+            <FilterBTN title="Sweet" />
+            <FilterBTN title="Semi-Sweet" />
+            <FilterBTN title="Red" />
+            <FilterBTN title="White" />
+            <FilterBTN title="Rose" />
+            <FilterBTN title="Sparkling" />
+        </ScrollView>
+        <View>
+            <Text style={styles.wineHeader}>Popular wines</Text>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
-        <FilterBTN title="Dry" />
-        <FilterBTN title="Sweet" />
-        <FilterBTN title="Semi-Sweet" />
-        <FilterBTN title="Red" />
-        <FilterBTN title="White" />
-        <FilterBTN title="Rose" />
-        <FilterBTN title="Sparkling" />
-      </ScrollView>
-      <View>
-          <Text style={styles.wineHeader}>Popular wines</Text>
+
+        <WineList wineList={wineDB.wineList} />
+
+          
       </View>
-      <ScrollView>
-          <WineList wineList={wineDB.wineList} />
-      </ScrollView>
-        
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -40,12 +43,13 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     width: '100%',
+    marginVertical:10
   },
   scrollContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 15,
     alignItems: 'center',
-    padding:15,
-    marginVertical:5
   },
   categoryButton: {
     backgroundColor: '#fff',
@@ -60,8 +64,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   wineHeader:{
-    fontWeight:600,
-    fontSize:30,
+    fontWeight:900,
+    fontSize:28,
     color: '#09331d',
   }
 });

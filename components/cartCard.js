@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import Quantity from './quantity';
 import { removeItemFromList } from '../feature/cartSlice';
@@ -13,9 +13,9 @@ export default function CartCard({ itemIndex, wine }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
+      <Pressable onPress={handleClose} style={styles.closeButton}>
         <Text style={styles.closeButtonText}>X</Text>
-      </TouchableOpacity>
+      </Pressable>
       <View style={styles.left}>
         <Image source={{ uri: wine[1].imgUrl }} style={styles.image} />
       </View>
