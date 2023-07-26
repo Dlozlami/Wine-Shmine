@@ -14,7 +14,7 @@ export default function Header({title, picture, cart, home}){
         <SafeAreaView style={styles.container}>
             {home?<View style={styles.left}>
                 <Pressable onPress={() => {navigation.navigate('home')}}>
-                    <Ionicons name="home-sharp" size={32} color="white" />
+                    <Ionicons name="home-outline" size={32} color="#e2dedb" />
                 </Pressable>
             </View>:null}
             <View style={styles.right}>

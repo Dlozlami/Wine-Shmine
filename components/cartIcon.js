@@ -27,7 +27,7 @@ container:{
   justifyContent: 'center',
   backgroundColor: '#e2dedb',
   borderRadius: 5,
-  padding:5,
+  paddingHorizontal:35,
   width: 60,
   height: 38,
   marginRight:10
@@ -37,14 +37,14 @@ items:{
   justifyContent: 'center',
   backgroundColor: '#09331d',
   borderRadius: 5,
-  paddingHorizontal:5,
-  paddingVertical:1,
-  marginLeft:5
+  paddingHorizontal:10,
+  paddingVertical:5,
+  marginLeft:2
 },
 textItems:{
   alignItems: 'center',
   justifyContent: 'center',
   color: '#e2dedb',
-  fontSize:18
+  fontSize:15
 }
 })

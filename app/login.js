@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Pressable,TextInput, Modal } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Pressable,TextInput } from 'react-native';
 import jwt_decode from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
 

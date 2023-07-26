@@ -1,6 +1,9 @@
 // cartSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+
 
 const initialState = {
   loading: false,
@@ -16,10 +19,10 @@ const initialState = {
   callBackURL:'http://10.255.66.152:19000/home'
 };
 
-
-export const checkout = createAsyncThunk('carts/checkout', async (args, thunkAPI) => {
+export const checkout = createAsyncThunk('carts/checkout', async (receipt, thunkAPI) => {
     try {
-      const response = await axios.post('http://localhost:8080/checkout', { 'name':'dlozi.mthethwa'});
+      console.log(receipt);
+      const response = await axios.post('http://localhost:8080/checkout', receipt);
       thunkAPI.dispatch(setCheckoutData(response.data.data));
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -32,17 +35,25 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToList(state, action) {
-      const newItem = action.payload;
-      const existingItemIndex = state.itemsList.findIndex((item) => item[1].wine_id === newItem.wine_id);
+      const quantity = 1;
+      const newListItem = [quantity, action.payload];
+      let oldItemIndex=0;
+      let wineExists=false;
 
-      if (existingItemIndex !== -1) {
-        state.itemsList[existingItemIndex][0] += 1; // Increase quantity
-      } else {
-        state.itemsList.push([1, newItem]); // Add new item with quantity 1
+    for (const listItem of state.itemsList) {
+      if (listItem[1].wine_id === newListItem[1].wine_id) {
+        state.itemsList[oldItemIndex][0] += 1;
+        oldItemIndex += 1;
+        // The wine_id already exists in the list
+        wineExists=true;
       }
-
+    }
+    // The wine_id does not exist in the list
+    if (!wineExists) {
+      state.itemsList.push(newListItem);
       state.itemsLength = state.itemsList.length;
-      updateSubtotalAndTotal(state);
+    }
+    updateSubtotalAndTotal(state);
     },
     removeItemFromList(state, action) {
       console.log('1 mos??')

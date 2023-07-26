@@ -7,11 +7,12 @@ import { Linking } from 'react-native';
 
 export default function Totals() {
   const { total, subtotal, VAT } = useSelector((store) => store.cart);
+  const { email} = useSelector((store) => store.login);
   const dispatch = useDispatch();
 
   const handleCheckout = async () => {
     try {
-      const url = await dispatch(checkout());
+      const url = await dispatch(checkout({email,total}));
       console.log(url)
       await Linking.openURL(url);
     } catch (error) {

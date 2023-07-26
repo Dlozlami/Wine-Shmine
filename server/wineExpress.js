@@ -1,3 +1,5 @@
+
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
 const morgan = require("morgan");
@@ -11,8 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 
-const secretKey = 'o8uhs7errqlosw830j#^*)N[]pek3e9--o-wqldsm902is,-dsuew0fduyj2-slw0wjd4r[w0-iiwqokweidg8wqj2pss9tffb96ywaxb937ehd90dow-;e;==lk9j98j/.oi-=[;k28uw4rq4ewfrqf+q';
-const refreshKey = 'o8uhs7errqlosw830j#^*)N[]xsyg26gednpsrtuui98908732fros-w;w.skhgfeazdsuew0fduyj2-slw0wjd4r[w0-iiwqokdfdweidg8wqj2pss9tff848r4e9p[jn9765tbw ds=1qqwsfrqf+q';
 
 mongoose.connect('mongodb://127.0.0.1:27017/wine-shmine')
 
@@ -67,12 +67,12 @@ app.post('/login',function(req,res){
 
 app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
-	//const { email, amount } = req.body;
-	console.log('Posted')
+	const { email, amount } = req.body;
+	console.log(req.body)
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
-	  "email": 'dlozi.mthethwa@gmail.com',
-	  "amount": 96375
+	  "email": email,
+	  "amount": amount
 	});
   
 	// Set up the options for the HTTPS request
@@ -82,7 +82,7 @@ app.post('/checkout', (req, res) => {
 	  path: '/transaction/initialize',
 	  method: 'POST',
 	  headers: {
-		Authorization: 'Bearer sk_test_8aaa40862087154621ff4fd5a8b9bfee00d6283f', // Replace with your actual Paystack API secret key
+		Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`, // Replace with your actual Paystack API secret key
 		'Content-Type': 'application/json'
 	  }
 	};

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { addItemToList } from '../feature/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,13 +13,15 @@ export default function AddToCart({ wine }) {
   };
 
   return (
-    <Pressable style={styles.button} onPress={handleAddToCart}>
+    <TouchableOpacity  style={styles.button} activeOpacity={0.7} onPress={handleAddToCart}>
       <Ionicons name="add-circle-sharp" size={48} color="#09331d" />
-    </Pressable>
+    </TouchableOpacity >
   );
 }
 
 const styles = StyleSheet.create({
-
+  button:{
+    
+  }
 
 });
