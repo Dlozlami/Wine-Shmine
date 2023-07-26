@@ -12,9 +12,16 @@ export default function Totals() {
 
   const handleCheckout = async () => {
     try {
-      const url = await dispatch(checkout({email,total}));
+      let amount = Math.trunc(total);
+      const url = await dispatch(checkout({email,amount}));
       console.log(url)
-      await Linking.openURL(url);
+      // navigate to external link below
+      if (url) {
+        // If the URL is provided, open the external link
+        await Linking.openURL(url);
+      } else {
+        console.log('Checkout URL not provided.');
+      }
     } catch (error) {
       console.log(error);
     }

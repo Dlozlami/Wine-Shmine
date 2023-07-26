@@ -67,12 +67,12 @@ app.post('/login',function(req,res){
 
 app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
-	const { email, amount } = req.body;
+	const { email, truncatedTotal } = req.body;
 	console.log(req.body)
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
 	  "email": email,
-	  "amount": amount
+	  "amount": truncatedTotal
 	});
   
 	// Set up the options for the HTTPS request
