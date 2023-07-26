@@ -21,9 +21,9 @@ const initialState = {
 
 export const checkout = createAsyncThunk('carts/checkout', async (receipt, thunkAPI) => {
     try {
-      console.log(receipt);
-      const response = await axios.post('http://localhost:8080/checkout', receipt);
+      const response = await axios.post('http://10.255.66.152:8080/checkout', receipt);
       thunkAPI.dispatch(setCheckoutData(response.data.data));
+      return response.data.data
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -120,5 +120,5 @@ const updateSubtotalAndTotal = (state) => {
 };
 
 
-export const { addItemToList, removeItemFromList, decreaseQauntity,clearCheckoutData,clearitemsList,getAuthorization_url} = cartSlice.actions;
+export const { addItemToList, removeItemFromList, setCheckoutData,decreaseQauntity,clearCheckoutData,clearitemsList,getAuthorization_url} = cartSlice.actions;
 export default cartSlice.reducer;

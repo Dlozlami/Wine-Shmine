@@ -10,15 +10,19 @@ export default function Totals() {
   const { email} = useSelector((store) => store.login);
   const dispatch = useDispatch();
 
-  const handleCheckout = async () => {
+
+  const handleCheckout = async (e) => {
+      e.preventDefault();
     try {
       let amount = Math.trunc(total);
       const url = await dispatch(checkout({email,amount}));
-      console.log(url)
+      let buy = url.payload.authorization_url
+      //console.log('This is buy url')
+      /console.log(url)
       // navigate to external link below
       if (url) {
         // If the URL is provided, open the external link
-        await Linking.openURL(url);
+        Linking.openURL(url.payload.authorization_url);
       } else {
         console.log('Checkout URL not provided.');
       }
@@ -26,6 +30,10 @@ export default function Totals() {
       console.log(error);
     }
   };
+  
+  const redirect = ()=>{
+    Linking.openURL(url);
+  }
 
   return (
     <View style={styles.container}>

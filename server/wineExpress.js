@@ -67,12 +67,12 @@ app.post('/login',function(req,res){
 
 app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
-	const { email, truncatedTotal } = req.body;
+	const { email, amount } = req.body;
 	console.log(req.body)
 	// Construct the params object from the extracted data
 	const params = JSON.stringify({
 	  "email": email,
-	  "amount": truncatedTotal
+	  "amount": amount
 	});
   
 	// Set up the options for the HTTPS request
@@ -82,7 +82,7 @@ app.post('/checkout', (req, res) => {
 	  path: '/transaction/initialize',
 	  method: 'POST',
 	  headers: {
-		Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`, // Replace with your actual Paystack API secret key
+		Authorization: `Bearer sk_test_8aaa40862087154621ff4fd5a8b9bfee00d6283f`, // Replace with your actual Paystack API secret key
 		'Content-Type': 'application/json'
 	  }
 	};
@@ -114,6 +114,6 @@ app.post('/checkout', (req, res) => {
   
 
 
-app.listen(8080, function () {
-	console.log("server started...\nClick the url to gain access: http://localhost:8080/");
+app.listen(8080,'10.255.66.152', function () {
+	console.log("server started...\nClick the url to gain access: http://10.255.66.152:8080/");
 })
