@@ -20,6 +20,8 @@ app.get('/',function(req,res){
 	res.send("Welcome to the Wine Shmine API\n\n===================================\n");
 });
 
+
+
 app.get('/api/winelist',function(req,res){
 
 });
@@ -60,12 +62,19 @@ app.post('/api/users', async function(req, res) {
   });
   
 
-app.post('/login',function(req,res){
+  app.post('/login',function(req,res){
 
-});
+	
+  });
+  
+  
+  app.post('/login',function(req,res){
 
-
-app.post('/checkout', (req, res) => {
+	
+  });
+  
+  
+  app.post('/checkout', (req, res) => {
 	// Extract the required data from the request body
 	const { email, amount } = req.body;
 	console.log(req.body)

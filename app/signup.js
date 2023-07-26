@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable, ImageBackground } from 'react-native';
 import { useDispatch } from 'react-redux'; 
 import * as ImagePicker from 'expo-image-picker';
+import {signupUser} from '../feature/signUpSlice';
 
 export default function SignUp(){
   const [name, setName] = useState('');
@@ -59,7 +60,9 @@ export default function SignUp(){
     if (imageURL) {
       (async () => {
         try {
+          console.log('This is an imageURL',imageURL)
           const response = await fetch(imageURL);
+          console.log("This is the response",response)
           const blob = await response.blob();
           const reader = new FileReader();
           reader.onloadend = () => {

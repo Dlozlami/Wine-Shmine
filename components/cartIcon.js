@@ -28,8 +28,8 @@ container:{
   backgroundColor: '#e2dedb',
   borderRadius: 5,
   paddingHorizontal:35,
-  width: 60,
-  height: 38,
+  width: 6,
+  height: 3,
   marginRight:10
 },
 items:{
