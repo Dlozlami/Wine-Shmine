@@ -19,7 +19,7 @@ export const signupUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       // Replace 'YOUR_SIGNUP_ENDPOINT' with the actual endpoint to post the data
-      const response = await axios.post('YOUR_SIGNUP_ENDPOINT', userData);
+      const response = await axios.post('Yhttp://localhost:8080/api/users', userData);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

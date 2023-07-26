@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable, ImageBackground } from 'react-native';
+import { useDispatch } from 'react-redux'; 
 import * as ImagePicker from 'expo-image-picker';
 
 export default function SignUp(){
@@ -9,12 +10,34 @@ export default function SignUp(){
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [picture, setPicture] = useState('');
-  
+  const [imageURL, setImageURL] = useState('');
+  const [base64Image, setBase64Image] = useState('');
+  const dispatch = useDispatch();
+
 
   const handleSignUp = () => {
-    // Implement your sign-up logic here
-    // For example, you can create a new user account with an API call
+      const userData = {
+        name,
+        surname,
+        email,
+        password,
+        phone,
+        picture: base64Image,
+      };
+      dispatch(signupUser(userData));
+
+      // Reset the state variables to clear the text fields
+      setName('');
+      setSurname('');
+      setEmail('');
+      setPassword('');
+      setPhone('');
+      setPicture('');
+      setImageURL('');
+      setBase64Image('');
   };
+  
+    
 
   const handleImagePicker = async () => {
     // No permissions request is necessary for launching the image library
@@ -28,9 +51,29 @@ export default function SignUp(){
     console.log(result);
 
     if (!result.canceled) {
-      setPicture(result.assets[0].uri);
+      setImageURL(result.assets[0].uri);
     }
   };
+
+  useEffect(() => {
+    if (imageURL) {
+      (async () => {
+        try {
+          const response = await fetch(imageURL);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result.split(',')[1]; // Extract base64 data from the reader result
+            setBase64Image(base64data); // Set the base64 image data to the state variable
+          };
+          reader.readAsDataURL(blob);
+        } catch (error) {
+          console.error('Error converting image to base64:', error);
+        }
+      })();
+    }
+  }, [imageURL]);
+  
 
   return (
     <ImageBackground source={require('../assets/img/main_bg.jpg')} style={{ width: '100%', height: '100%' }}>
