@@ -1,44 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Pressable, ImageBackground } from 'react-native';
-import { useDispatch } from 'react-redux'; 
-import * as ImagePicker from 'expo-image-picker';
-import {signupUser} from '../feature/signUpSlice';
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ImageBackground,
+  Platform,
+} from "react-native";
+import { useDispatch } from "react-redux";
+import * as ImagePicker from "expo-image-picker";
+import { signupUser } from "../feature/signUpSlice";
 
-export default function SignUp(){
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [picture, setPicture] = useState('');
-  const [imageURL, setImageURL] = useState('');
-  const [base64Image, setBase64Image] = useState('');
+export default function SignUp() {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [picture, setPicture] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [base64Image, setBase64Image] = useState("");
   const dispatch = useDispatch();
-
+  const platform = Platform.OS;
 
   const handleSignUp = () => {
-      const userData = {
-        name,
-        surname,
-        email,
-        password,
-        phone,
-        picture: base64Image,
-      };
-      dispatch(signupUser(userData));
+    const userData = {
+      name,
+      surname,
+      email,
+      password,
+      phone,
+      picture: base64Image,
+    };
+    dispatch(signupUser(userData));
 
-      // Reset the state variables to clear the text fields
-      setName('');
-      setSurname('');
-      setEmail('');
-      setPassword('');
-      setPhone('');
-      setPicture('');
-      setImageURL('');
-      setBase64Image('');
+    // Reset the state variables to clear the text fields
+    setName("");
+    setSurname("");
+    setEmail("");
+    setPassword("");
+    setPhone("");
+    setPicture("");
+    setImageURL("");
+    setBase64Image("");
   };
-  
-    
 
   const handleImagePicker = async () => {
     // No permissions request is necessary for launching the image library
@@ -60,26 +66,31 @@ export default function SignUp(){
     if (imageURL) {
       (async () => {
         try {
-          console.log('This is an imageURL',imageURL)
-          const response = await fetch(imageURL);
-          console.log("This is the response",response)
+          if (platform === "web") {
+            const response = await fetch(imageURL);
+            setPicture(response);
+          }
+
+          if (platform === "android") {
+          }
           const blob = await response.blob();
           const reader = new FileReader();
           reader.onloadend = () => {
-            const base64data = reader.result.split(',')[1]; // Extract base64 data from the reader result
-            setBase64Image(base64data); // Set the base64 image data to the state variable
+            const base64data = reader.result;
+            setBase64Image(base64data);
           };
-          reader.readAsDataURL(blob);
         } catch (error) {
-          console.error('Error converting image to base64:', error);
+          console.error("Error converting image to base64:", error);
         }
       })();
     }
   }, [imageURL]);
-  
 
   return (
-    <ImageBackground source={require('../assets/img/main_bg.jpg')} style={{ width: '100%', height: '100%' }}>
+    <ImageBackground
+      source={require("../assets/img/main_bg.jpg")}
+      style={{ width: "100%", height: "100%" }}
+    >
       <View style={styles.centerForm}>
         <View style={styles.container}>
           <Text style={styles.heading}>Sign Up</Text>
@@ -90,7 +101,7 @@ export default function SignUp(){
                 style={styles.input}
                 placeholder="Enter your name"
                 value={name}
-                onChangeText={text => setName(text)}
+                onChangeText={(text) => setName(text)}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -99,7 +110,7 @@ export default function SignUp(){
                 style={styles.input}
                 placeholder="Enter your surname"
                 value={surname}
-                onChangeText={text => setSurname(text)}
+                onChangeText={(text) => setSurname(text)}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -108,7 +119,7 @@ export default function SignUp(){
                 style={styles.input}
                 placeholder="Enter your email"
                 value={email}
-                onChangeText={text => setEmail(text)}
+                onChangeText={(text) => setEmail(text)}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -118,7 +129,7 @@ export default function SignUp(){
                 placeholder="Enter your password"
                 secureTextEntry={true}
                 value={password}
-                onChangeText={text => setPassword(text)}
+                onChangeText={(text) => setPassword(text)}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -127,7 +138,7 @@ export default function SignUp(){
                 style={styles.input}
                 placeholder="Enter your phone number"
                 value={phone}
-                onChangeText={text => setPhone(text)}
+                onChangeText={(text) => setPhone(text)}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -138,132 +149,123 @@ export default function SignUp(){
               >
                 <Text style={styles.imagePickerButtonText}>Select Picture</Text>
               </Pressable>
-              {picture && (
-                <Text style={styles.imageFileName}>{picture}</Text>
-              )}
+              <Pressable style={[styles.button]} onPress={handleSignUp}>
+                <Text style={styles.buttonText}>Sign Up</Text>
+              </Pressable>
             </View>
-            <Pressable
-              style={[styles.button]}
-              onPress={handleSignUp}
-            >
-              <Text style={styles.buttonText}>Sign Up</Text>
-            </Pressable>
-            
           </View>
         </View>
       </View>
     </ImageBackground>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     margin: 20,
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   subHeading: {
     fontSize: 16,
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   formContainer: {
-    width: '100%',
+    width: "100%",
   },
   inputContainer: {
     marginBottom: 15,
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: '#09331d',
+    backgroundColor: "#09331d",
     borderRadius: 5,
     paddingVertical: 12,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
   },
   disabledButton: {
     opacity: 0.7,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 16,
   },
   centerForm: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   modalText: {
     fontSize: 18,
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   okButton: {
-    backgroundColor: '#f3572a',
+    backgroundColor: "#f3572a",
     borderRadius: 5,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   okButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 16,
   },
   welcomeContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   imagePickerButton: {
-    backgroundColor: '#09331d',
+    backgroundColor: "#09331d",
     borderRadius: 5,
     paddingVertical: 12,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
   },
   imagePickerButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     fontSize: 16,
   },
   imageFileName: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
     marginTop: 5,
   },
 });
-
-
