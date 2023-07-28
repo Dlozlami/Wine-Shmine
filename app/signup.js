@@ -9,8 +9,8 @@ import {
   Platform,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import * as ImagePicker from "expo-image-picker";
 import { signupUser } from "../feature/signUpSlice";
+import ImageUpload from "../components/imageUpload";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -19,8 +19,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [picture, setPicture] = useState("");
-  const [imageURL, setImageURL] = useState("");
-  const [base64Image, setBase64Image] = useState("");
+
   const dispatch = useDispatch();
   const platform = Platform.OS;
 
@@ -31,7 +30,7 @@ export default function SignUp() {
       email,
       password,
       phone,
-      picture: base64Image,
+      imageName,
     };
     dispatch(signupUser(userData));
 
@@ -41,50 +40,8 @@ export default function SignUp() {
     setEmail("");
     setPassword("");
     setPhone("");
-    setPicture("");
-    setImageURL("");
-    setBase64Image("");
+    setImageName("");
   };
-
-  const handleImagePicker = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.canceled) {
-      setImageURL(result.assets[0].uri);
-    }
-  };
-
-  useEffect(() => {
-    if (imageURL) {
-      (async () => {
-        try {
-          if (platform === "web") {
-            const response = await fetch(imageURL);
-            setPicture(response);
-          }
-
-          if (platform === "android") {
-          }
-          const blob = await response.blob();
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            setBase64Image(base64data);
-          };
-        } catch (error) {
-          console.error("Error converting image to base64:", error);
-        }
-      })();
-    }
-  }, [imageURL]);
 
   return (
     <ImageBackground
@@ -142,13 +99,7 @@ export default function SignUp() {
               />
             </View>
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Picture</Text>
-              <Pressable
-                style={styles.imagePickerButton}
-                onPress={handleImagePicker}
-              >
-                <Text style={styles.imagePickerButtonText}>Select Picture</Text>
-              </Pressable>
+              <ImageUpload setImageName={setImageName} />
               <Pressable style={[styles.button]} onPress={handleSignUp}>
                 <Text style={styles.buttonText}>Sign Up</Text>
               </Pressable>
@@ -216,56 +167,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalContent: {
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  okButton: {
-    backgroundColor: "#f3572a",
-    borderRadius: 5,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    alignItems: "center",
-  },
-  okButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  welcomeContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagePickerButton: {
-    backgroundColor: "#09331d",
-    borderRadius: 5,
-    paddingVertical: 12,
-    alignItems: "center",
-    marginTop: 10,
-  },
-  imagePickerButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  imageFileName: {
-    color: "black",
-    fontSize: 14,
-    marginTop: 5,
   },
 });

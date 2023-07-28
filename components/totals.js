@@ -1,102 +1,102 @@
-import { StyleSheet, Text, View, Pressable, Modal } from 'react-native';
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {checkout} from '../feature/cartSlice';
-import { Linking } from 'react-native';
-
+import { StyleSheet, Text, View, Pressable, Modal } from "react-native";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { checkout } from "../feature/cartSlice";
+import { Linking } from "react-native";
 
 export default function Totals() {
   const { total, subtotal, VAT } = useSelector((store) => store.cart);
-  const { email} = useSelector((store) => store.login);
+  const { email } = useSelector((store) => store.login);
+  const { checkoutData } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
-
   const handleCheckout = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
     try {
       let amount = Math.trunc(total);
-      const url = await dispatch(checkout({email,amount}));
-      let buy = url.payload.authorization_url
-      //console.log('This is buy url')
-      /console.log(url)
+      const url = await dispatch(checkout({ email, amount }));
+      console.log("This is checkoutData", checkoutData);
       // navigate to external link below
       if (url) {
         // If the URL is provided, open the external link
         Linking.openURL(url.payload.authorization_url);
       } else {
-        console.log('Checkout URL not provided.');
+        console.log("Checkout URL not provided.");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
-  const redirect = ()=>{
+
+  const redirect = () => {
     Linking.openURL(url);
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.label}>Subtotal</Text>
-        <Text style={styles.value}>{`${(subtotal/100).toFixed(2)}`}</Text>
+        <Text style={styles.value}>{`${(subtotal / 100).toFixed(2)}`}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.label}>VAT @ 15%</Text>
-        <Text style={styles.value}>{`${((subtotal/100) * 0.15).toFixed(2)}`}</Text>
+        <Text style={styles.value}>{`${((subtotal / 100) * 0.15).toFixed(
+          2
+        )}`}</Text>
       </View>
       <View style={styles.line} />
       <View style={[styles.row, styles.totalRow]}>
         <Text style={[styles.label, styles.bold]}>Total</Text>
-        <Text style={[styles.value, styles.bold]}>{`ZAR ${(total/100).toFixed(2)}`}</Text>
+        <Text style={[styles.value, styles.bold]}>{`ZAR ${(total / 100).toFixed(
+          2
+        )}`}</Text>
       </View>
 
       {/* Checkout Button */}
       <Pressable onPress={handleCheckout} style={styles.checkoutButton}>
         <Text style={styles.checkoutButtonText}>Checkout</Text>
       </Pressable>
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#09331d',
+    backgroundColor: "#09331d",
     padding: 10,
-    borderRadius:10
+    borderRadius: 10,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 5,
   },
   label: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
   },
   value: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
   },
   line: {
     borderBottomWidth: 1,
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
     marginVertical: 5,
   },
   totalRow: {
     marginTop: 10,
   },
   bold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   checkoutButton: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
     padding: 15,
     marginTop: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 3,
@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   checkoutButtonText: {
-    color: '#09331d',
-    fontWeight: 'bold',
+    color: "#09331d",
+    fontWeight: "bold",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
