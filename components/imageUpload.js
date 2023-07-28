@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable, Platform } from "react-native";
 import React from "react";
 import * as ImagePicker from "expo-image-picker";
 import { useState, useEffect } from "react";
@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 export default function ImageUpload({ setImageName }) {
   const [imageURL, setImageURL] = useState("");
   const [base64Image, setBase64Image] = useState("");
+  const platform = Platform.OS;
 
   const handleImagePicker = async () => {
     // No permissions request is necessary for launching the image library
@@ -34,12 +35,6 @@ export default function ImageUpload({ setImageName }) {
 
           if (platform === "android") {
           }
-          const blob = await response.blob();
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64data = reader.result;
-            setBase64Image(base64data);
-          };
         } catch (error) {
           console.error("Error converting image to base64:", error);
         }

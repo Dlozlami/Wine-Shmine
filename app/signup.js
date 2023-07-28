@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,7 +6,6 @@ import {
   TextInput,
   Pressable,
   ImageBackground,
-  Platform,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../feature/signUpSlice";
@@ -18,10 +17,10 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [picture, setPicture] = useState("");
+  const [imageName, setImageName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
-  const platform = Platform.OS;
 
   const handleSignUp = () => {
     const userData = {
@@ -33,7 +32,7 @@ export default function SignUp() {
       imageName,
     };
     dispatch(signupUser(userData));
-
+    setSubmitted(true);
     // Reset the state variables to clear the text fields
     setName("");
     setSurname("");
