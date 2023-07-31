@@ -9,7 +9,6 @@ const initialState = {
   itemsList: [],
   itemsLength: 0,
   total: 0,
-
   subtotal: 0,
   VAT: 0.15,
   totalQauntities: 0,
@@ -51,13 +50,16 @@ const cartSlice = createSlice({
           wineExists = true;
         }
       }
+
       // The wine_id does not exist in the list
       if (!wineExists) {
         state.itemsList.push(newListItem);
         state.itemsLength = state.itemsList.length;
       }
+
       updateSubtotalAndTotal(state);
     },
+
     removeItemFromList(state, action) {
       console.log("1 mos??");
       const wineIdToRemove = action.payload;
